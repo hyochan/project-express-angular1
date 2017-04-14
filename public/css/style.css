@@ -1,0 +1,50 @@
+body {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+table tbody tr {
+    cursor: pointer;
+}
+
+/* angular-bootstrap과 bootstrap이랑 꼬이지 않게 css */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/* 시작 : 페이지 전환시 애니메이션 적용 */
+.view-slide-in.ng-enter {
+    transition:0.2s;
+    opacity:0;
+}
+.view-slide-in.ng-enter-stagger{
+    transition-delay:0.1s;
+}
+.view-slide-in.ng-enter-activty{
+    opacity:1;
+}
+.view-slide-in.ng-leave-stagger{
+    transition-delay:0.1s;
+}
+.view-slide-in.ng-leave {
+    transition:0.2s;
+    opacity: 1;
+}
+.view-slide-in.ng-leave-active{
+    opacity: 0;
+}
+/* 끝 : 페이지 전환시 애니메이션 적용 */
+
+.disableClick{
+    pointer-events: none;
+}
+
+/* 768보다 작으면 pull-right를 안한다 */
+@media (min-width: 768px) {
+    .pull-right-custom {
+        float: right;
+    }
+}

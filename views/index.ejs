@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title> 장효찬 네트워크</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/components-font-awesome/css/font-awesome.min.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/index.css -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/chat.css">
+  <!-- endbuild -->
+</head>
+<body ng-app="hyochanApp" >
+<!--[if lte IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- Add your site or application content here -->
+<div class="header" style="margin-bottom: 80px;">
+  <nav class="navbar navbar-default navbar-fixed-top" ng-controller="navCtrl" ng-hide="isNavbarActive('/login') || isNavbarActive('/signup')|| isNavbarActive('/find_pw')">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar">-->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a id="title_lnk" class="navbar-brand" href="#/">hyochan.org</a>
+      </div>
+      <div id="myNavbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav pull-right-custom">
+          <li ng-class="{active: ($route.current.activeTab == 'home')}">
+            <a ng-href="/#/">Home</a></li>
+          <li ng-class="{active: ($route.current.activeTab == 'chat')}">
+            <a ng-href="/#chat">Chat</a></li>
+          <li ng-class="{active: ($route.current.activeTab == 'member')}">
+            <a ng-href="/#member">Members</a></li>
+          <li ng-class="{active: ($route.current.activeTab == 'board')}">
+            <a ng-href="/#board">Board</a></li>
+          <li ng-class="{active: ($route.current.activeTab == 'about')}">
+            <a ng-href="/#about">About</a></li>
+          <li ng-class="{active: ($route.current.activeTab == 'account')}" class="visible-xs">
+            <a ng-href="/#account">Account</a></li>
+          <!-- setting menu dropdown -->
+          <li class="dropdown hidden-xs"
+              ng-class="{active: ($route.current.activeTab == 'account' || $route.current.activeTab == 'setting')}">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown"
+               role="button" aria-haspopup="true" aria-expanded="false">More<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a ng-href="/#account">Account</a></li>
+              <li><a ng-href="/#setting">Setting</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a ng-href="/#" ng-click="logout()">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="container">
+  <div ng-view="" class="view-slide-in"></div>
+</div>
+
+<div class="footer navbar-fixed-bottom hidden-xs" style="background-color: #ffffff;">
+  <div class="container-fluid pull-right">
+    <p><span class="glyphicon glyphicon-pencil"></span> Copyright hyochan.org All Rights Reserved</p>
+  </div>
+</div>
+
+<!--- "equalHeight에서 _ 변수 인식하려면 써줘야함. "-->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js // 배치 제대로 안하면 modal 서비스 같은거 오류 남 주의!! -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/jquery/jquery.js"></script>
+<script src="/bootstrap/js/bootstrap.js"></script>
+<script src="/angular/angular.js"></script>
+<script src="/angular-animate/angular-animate.js"></script>
+<script src="/angular-route/angular-route.js"></script>
+<script src="/angular-sanitize/angular-sanitize.js"></script>
+<script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="/angular-modal-service/angular-modal-service.js"></script>
+<script src="/angular-utils-pagination/dirPagination.js"></script>
+<script src="/angular-scroll/angular-scroll.min.js"></script>
+
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="./javascripts/app.js"></script>
+<!-- directives -->
+<!--
+<script src="./javascripts/directives/tooltip.js"></script>
+-->
+<!-- controllers -->
+<script src="./javascripts/controllers/navCtrl.js"></script>
+<script src="./javascripts/controllers/loginCtrl.js"></script>
+<script src="./javascripts/controllers/signupCtrl.js"></script>
+<script src="./javascripts/controllers/findPwCtrl.js"></script>
+<script src="./javascripts/controllers/homeCtrl.js"></script>
+<script src="./javascripts/controllers/chatCtrl.js"></script>
+<script src="./javascripts/controllers/memberCtrl.js"></script>
+<script src="./javascripts/controllers/boardCtrl.js"></script>
+<script src="./javascripts/controllers/aboutCtrl.js"></script>
+<script src="./javascripts/controllers/accountCtrl.js"></script>
+<script src="./javascripts/controllers/settingCtrl.js"></script>
+<!-- services -->
+<script src="./javascripts/services/storageServ.js"></script>
+<script src="./javascripts/services/httpServ.js"></script>
+<script src="./javascripts/services/funcServ.js"></script>
+<script src="./javascripts/services/ioChatServ.js"></script>
+<!-- directives -->
+<script src="./javascripts/directives/equalHeights.js"></script>
+<script src="./javascripts/directives/schrollBottom.js"></script>
+<script src="./javascripts/directives/affixer.js"></script>
+<!-- endbuild -->
+
+
+</body>
+
+</html>

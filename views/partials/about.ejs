@@ -1,0 +1,72 @@
+<div class="section" style="margin-bottom:50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="./images/about.jpg" width="190px" height="300px"
+                     class="img-responsive">
+            </div>
+            <div class="col-md-9">
+                <h3>About Me</h3>
+                <p>
+                    안녕하세요.<br>
+                    서비스 개발에 꿈과 열정이 있는 hyochan입니다.<br>
+                    저는 주로 혼자서 이런 저런 어플리케이션을 개발하지만 제가 개발한 산출물들을 공유했으면<br>
+                    하는 마음에서 사이트를 운영하기로 했습니다.<br>
+                    프로젝트에 관심이 있으시면 참여해서 소스를 같이 수정해 나가는 것도 굉장히 환영합니다.<br>
+                    메일로 저한테 문의를 해주시면 svn 또는 git 계정을 생성해드리겠습니다.<br>
+                    감사합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-md-12">
+            <div class="well well-sm" >
+                <form name="aboutForm" class="form-horizontal" method="post" >
+                    <fieldset>
+                        <legend class="text-center header" style="padding: 10px;">Contact Me</legend>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center glyphicon glyphicon-user"></span>
+                            <div class="col-md-8">
+                                <input name="name" ng-model="mail.name" type="text" placeholder="이름" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center glyphicon glyphicon-envelope"></span>
+                            <div class="col-md-8">
+                                <input name="email" ng-model="mail.email" type="email" placeholder="이메일 주소" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center glyphicon glyphicon-phone"></span>
+                            <div class="col-md-8">
+                                <input id="phone" ng-model="mail.phone" name="phone" type="text" placeholder="폰 번호" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center glyphicon glyphicon-pencil"></span>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="message" ng-model="mail.message" placeholder="하고 싶은 말" rows="7" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 text-center" ng-disabled="">
+                                <p><button type="button" class="btn btn-primary btn-lg"
+                                   ng-disabled="aboutForm.$invalid || btnClicked" ng-click="sendMail(mail)">보내기</button></p>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div role="alert"
+         ng-class="(alertAbout.flag==='success') ? 'alert alert-success' :
+                            (alertAbout.flag==='danger') ? 'alert alert-danger' : 'hidden'">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{alertAbout.text}}
+    </div>
+    <br><br><br>
+</div>

@@ -1,0 +1,173 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var server = require('../server');
+var debug = require('debug')('hyochan:servers');
+var http = require('http');
+var socketio = require('socket.io');
+var connection = require('../appset/mysql/init');
+var ioChatParam = require('../appset/global/ioChatParam');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+server.set('port', port);
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+      ? 'Pipe ' + port
+      : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = app_soc.address();
+  var bind = typeof addr === 'string'
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+/**
+ * Create HTTP server.
+ */
+var app_soc = http.createServer(server).listen(server.get('port'), function() {
+  console.log('Express server listening on port ' + app_soc.address().port);
+});
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+app_soc.on('error', onError);
+app_soc.on('listening', onListening);
+
+
+/***********************  시작 : 소켓 프로그래밍   ***********************/
+// 웹 소캣 서버 생성
+var io = socketio.listen(app_soc, { log: true });
+// ioChat 소켓
+var ioChat = io.of('/ioChat');
+ioChat.on('connection', function(socket) {
+  console.log("connection is on : " + socket.id);
+
+  socket.on('disconnect', function(){
+    console.log("socket disconnected : " + socket.id);
+    ioChatParam.removeDisconnected(socket.id);
+    ioChatParam.printConnected();
+  });
+
+  /**
+   * CLIENT SIDE event
+   * 1)
+   *
+   * SERVER SIDE event
+   * 1)
+   */
+
+  /*************   시작 : SOCKET EVENT   *************/
+    // 로그인
+  socket.on('login', function (email) {
+
+    var user = {};
+    var sql = "select email, name, photo from users where email = ?";
+    connection.query(sql, [email], function (err, rows) {
+      if(err) console.log(err);
+      else {
+        if(rows.length == 0){
+          console.log("there is no user : " + email);
+        }
+        else {
+          user.email = email;
+          user.name = rows[0].name;
+          user.photo = rows[0].photo;
+          console.log(JSON.stringify(ioChatParam.CLIENTs));
+          for(var i in ioChatParam.CLIENTs){
+            if(ioChatParam.CLIENTs[i].user.email == email){
+              // 접속 현황에 이미 있는 유저면 emit 안함. (같은 유저 다른 세션)
+              ioChat.emit('user_join', user);
+              break;
+            }
+          }
+          if(!ioChatParam.getUserOfSocket(socket.id)){
+            ioChatParam.CLIENTs.push({
+              socket_id : socket.id,
+              user : user
+            });
+            // ioChatParam.printConnected();
+          }
+        }
+      }
+    });
+  });
+  socket.on('logout', function(email){
+    ioChatParam.removeLoggedout(email);
+    ioChat.emit('user_left', email);
+  });
+  socket.on('send_chat', function(chat){
+    var sql = "insert into chats values (null, ?, ?, now())";
+    connection.query(sql, [chat.email, chat.msg], function (err, results) {
+      if(err) console.log(err);
+      else {
+        console.log("result info : " +  JSON.stringify(results.insertedId));
+        sql = "select c.number,c.email,u.photo,c.created as date,u.name,c.msg " +
+            "from chats as c join users as u where c.email = u.email and number = ?";
+        connection.query(sql, [results.insertId], function (err, rows) {
+          if(err) console.log(err);
+          console.log(JSON.stringify(rows));
+          if(rows != undefined) ioChat.emit('receive_chat', rows[0]);
+        });
+      }
+    });
+  });
+  /*************   종료 : STB SIDE SOCKET EVENT   *************/
+});

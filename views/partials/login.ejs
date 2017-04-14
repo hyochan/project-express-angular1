@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="./css/login.css" />
+<!-- naver api -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+
+<!--
+    you can substitue the span of reauth email for a input with the email and
+    include the remember me checkbox
+    -->
+<div class="container">
+    <div tabindex="-1" aria-hidden="true">
+        <h1 class="text-center" style="color: #a7dbd8">hyochan.org</h1>
+    </div>
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="./upload/profile/user_empty.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form role="form" name="loginForm" class="form-signin">
+            <input type="email" id="inputEmail" class="form-control" placeholder="이메일 주소"
+                   ng-model="user.email" required autofocus>
+            <input type="password" class="form-control" placeholder="암호"
+                   ng-model="user.pw" required>
+            <div id="remember" class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="user.autoLogin"> 자동 로그인
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block btn-login" type="submit"
+                    ng-disabled="loginForm.$invalid" ng-click="login(user)">로그인</button>
+        </form><!-- /form -->
+        <span class="pull-right">
+            <a ng-href="#/signup" class="register" title="Register new user!!" data-toggle="tooltip" data-placement="top">회원가입</a>
+        </span>
+        <span>
+            <a href="#/find_pw" title="로그인 해주세요." class="register" data-toggle="tooltip" data-animation="am-fade-and-scale">비밀번호 찾기</a>
+        </span>
+        <br><br>
+        <div class="row">
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-block btn-facebook" ng-click="facebook_login()">페이스북 로그인</button>
+            </div>
+            <br class="visible-xs">
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-block btn-google" ng-click="google_login()">Google+ 로그인</button>
+            </div>
+        </div>
+        <br><br>
+        <div id="login_alert" class="alert" role="alert"
+             ng-class="[(isSuccess) ? 'alert alert-success' : 'alert alert-danger', (isAlert) ? '' : 'hidden']" ng-bind-html="loginAlertHTML">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        </div>
+    </div><!-- /card-container -->
+<!--
+    <div id="login_alert" class="alert" role="alert"
+         ng-class="[(isSuccess) ? 'alert alert-success' : 'alert alert-danger', (!isAlert) ? '' : 'hidden']" ng-bind-html="loginAlertHTML">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    </div>
+-->
+
+
+</div><!-- /container -->

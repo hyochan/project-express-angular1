@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="./css/login.css" />
+<style>
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+</style>
+
+<div class="container">
+    <div tabindex="-1" aria-hidden="true">
+        <h1 class="text-center" style="color: #a7dbd8">hyochan.org</h1>
+    </div>
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="./upload/profile/user_empty.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form id="signupForm" class="form-signin" enctype="multipart/form-data" method="post">
+            <div class="fileUpload btn btn-default">
+                <span>사진 변경</span>
+                <input name="inputPhoto" id="inputPhoto" type="file" name="inputPhoto" accept="image/*" class="upload"/>
+            </div>
+            <input name="inputEmail" type="email" class="form-control" placeholder="이메일 주소" ng-model="user.email" required autofocus>
+            <input name="inputPw" type="password" class="form-control" placeholder="암호" ng-model="user.pw" ng-change="checkPwMatch()" required autofocus>
+            <input name="inputPwOk" type="password" class="form-control" placeholder="암호 확인" ng-model="user.pwOk" ng-change="checkPwMatch()" required autofocus>
+            <input name="inputName" type="text" id="name" class="form-control" placeholder="이름" ng-model="user.name" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block btn-login"
+                    ng-disabled="!user.email || !user.pw || !user.pwOk || !user.name"
+                    ng-click="signup()">회원가입</button>
+        </form>
+        <span>
+            <a href="/#login" title="로그인 해주세요." class="register" data-animation="am-fade-and-scale">◀︎ 로그인으로 돌아가기</a>
+        </span>
+        <br><br>
+        <!-- form validation && server response alert -->
+        <div id="signup_alert" ng-class="[(isSuccess) ? 'alert alert-success' : 'alert alert-danger', (isAlert) ? '' : 'hidden']" ng-bind-html="signupAlert" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        </div>
+    </div><!-- /card-container -->
+</div><!-- /container -->"

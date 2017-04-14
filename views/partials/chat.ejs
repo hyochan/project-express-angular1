@@ -1,0 +1,79 @@
+<div id="body">
+    <!-- 검색 -->
+    <div class="row">
+        <div class="col-sm-3 hidden-xs" style="padding-bottom:20px">
+            <div style="margin-bottom: 3%;" class="portlet-heading">
+                <!-- ###############  chat : ROOM INFO ###############-->
+                <div class="portlet-title">
+                    <h4><i class="fa fa-comments-o" aria-hidden="true"></i> 전체 회원 채팅</h4>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9" style="padding-bottom:20px">
+            <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                <input type="text" class="form-control" placeholder="채팅 검색..." ng-model="chatQuery[chatQueryBy]">
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <div class="chat_root">
+        <!-- 채팅 창 -->
+        <div id="chat_main" class="row">
+            <div id="chat_content">
+                <!-- ###############  chat : CHAT LIST ###############-->
+                <div id="chat" schroll-bottom="chats" class="col-md-10">
+                    <div style="padding: 5px;" class="media" ng-repeat="chat in chats | filter:chatQuery">
+                        <a href="" class="pull-left">
+                            <img ng-src="{{chat.photo}}" style="width:50px;" alt="" class="media-object img-circle"/>
+                        </a>
+                        <div style="padding-left: 10px" class="media-body">
+                            <h4 class="media-heading">{{chat.name}}<span style="font-size:small;" class="small pull-right">{{chat.date}}</span></h4>
+                            <p>{{chat.msg}}</p>
+                        </div>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+            <!-- 접속 회원 -->
+            <div class="online" class="col-md-2 visible-md visible-lg">
+                <div class="online_head">
+                    <p>접속현황</p>
+                </div>
+                <div class="online_list">
+                    <ul class="list-unstyled" >
+                        <li class="left clearfix" ng-repeat="online in onlines">
+                            <div class="body clearfix">
+                                <p style="white-space: nowrap; overflow: hidden; textOverflow:ellipsis">{{online.name}}</p>
+                                <p style="word-break: break-all">{{online.email}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="chat_bottom">
+            <form role="form">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-btn btn-group dropup">
+                        <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn btn-default dropdown-toggle">액션<span class="caret"></span></button>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="">사진 전송</a></li>
+                            <!--
+                                <li class="divider"></li>
+                                <li><a href="#">파일 전송</a></li>
+                                <li><a href="#">동영상 전송</a></li>
+                            -->
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control" ng-model="msg"/>
+                    <div class="input-group-btn">
+                        <button type="btn" class="btn btn-default" ng-click="sendChat(msg)">입력</button>
+                    </div><!-- /btn-group -->
+                </div><!-- /input-group -->
+            </form>
+        </div><!-- /.row -->
+    </div>
+</div>

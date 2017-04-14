@@ -1,0 +1,74 @@
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="text-center">MEMBERS</h1>
+                <p class="text-center">전체 유저들입니다.</p><br>
+            </div>
+        </div>
+
+        <!-- 검색 -->
+        <div class="row">
+            <div class="col-xs-12" style="padding-bottom:20px">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </span>
+                    <input type="text" class="form-control" placeholder="맴버 검색..." ng-model="memberQuery[memberQueryBy]">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+
+        <!-- 맴버 리스트 -->
+        <div class="row" style="margin-top: 30px;">
+            <a href="" ng-click="$event.preventDefault(); memberModalOn(member._id)" ng-repeat="member in members | filter:memberQuery">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="padding: 0px; text-align:center;">
+                    <img ng-src="{{member.photo}}"
+                         class="center-block img-circle" width="96" height="96">
+                    <h3 class="text-center">
+                        {{member.name}}
+                    </h3>
+                    <p class="text-center">{{member.email}}</p>
+                    <br><br>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- 맴버 MODAL -->
+<script type="text/ng-template" id="memberModal.html">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">맴버 정보</h4>
+                </div>
+                <form class="form-horizontal" role="form">
+                    <div class="modal-body">
+                        <div class="well well-lg">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <img ng-src="{{selectedMember.photo}}"
+                                         class="center-block img-circle"
+                                         style="padding-right: 30px;" width="250" height="250"/>
+                                </div>
+                                <div class="col-sm-6" style="margin-top: 10px;">
+                                    <ul class="list-unstyled" style="line-height:1.77;">
+                                        <!-- 이메일 -->
+                                        <li>{{selectedMember.name}}</li>
+                                        <!-- 이름 -->
+                                        <li>{{selectedMember.email}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div></div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-dismiss="modal">닫기</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>

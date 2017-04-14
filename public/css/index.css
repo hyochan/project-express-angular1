@@ -1,0 +1,174 @@
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+body {
+    padding: 0;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.footer {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* button primary */
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #333;
+    border-color: #222;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #515151;
+    border-color: #444;
+}
+
+/* Navbar */
+.navbar-default {
+    /*
+    background-color: #F8F8F8;
+    border-color: #E7E7E7;
+    */
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgb(99, 99, 99), #3d3d3d);
+}
+/* title */
+.navbar-default .navbar-brand {
+    color: #ccc;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #fff;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #eee;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #999;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+
+/* Sidebar */
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-nav li {
+    line-height: 40px;
+    text-indent: 20px;
+}
+
+.sidebar-nav li a {
+    color: #999999;
+    display: block;
+    text-decoration: none;
+}
+
+.sidebar-nav li a:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+    text-decoration: none;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    line-height: 60px;
+    font-size: 18px;
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+/* Custom page header */
+.header {
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+    margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+
+    /* Remove the padding we set earlier */
+    .header,
+    .marketing,
+    .footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 30px;
+    }
+    /* Remove the bottom border on the jumbotron for visual effect */
+    .jumbotron {
+        border-bottom: 0;
+    }
+}

@@ -1,0 +1,96 @@
+<style>
+    .profile-img-card {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto 10px;
+        display: block;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+    .profile-name-card {
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        margin: 10px 0 0;
+        min-height: 1em;
+    }
+    .fileUpload {
+        position: relative;
+        overflow: hidden;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+</style>
+<script>
+</script>
+<!-- html -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 10px; padding-right: 10%; padding-left: 10%;">
+            <form id="profileUpdateForm" enctype="multipart/form-data" method="post" class="form center-block">
+                <img id="profile-img" class="profile-img-card" src="{{user.photo}}" />
+                <p id="profile-name" class="profile-name-card"></p>
+                <div class="fileUpload btn btn-default">
+                    <span>사진 변경</span>
+                    <input name="inputPhoto" id="inputPhoto" type="file" name="inputPhoto" accept="image/*" class="upload"/>
+                </div>
+                <p class="text-center" style="margin-bottom: 30px;">{{user.email}}</p>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-user"></span>
+                    </span>
+                    <input name="inputName" type="text" placeholder="이름" class="form-control" ng-model="user.name"
+                           required="">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="updateProfile()">프로필 수정</button>
+                </div>
+            </form>
+            <form id="pwUpdateForm" method="post" class="form center-block" style="margin-top: 50px;">
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-lock"></span>
+                    </span>
+                    <input ng-model="pw.prev" type="password" class="form-control" placeholder="이전 암호">
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-lock"></span>
+                    </span>
+                    <input ng-model="pw.pw" type="password" class="form-control" placeholder="암호">
+                </div>
+                <div class="form-group input-group">
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-lock"></span>
+                    </span>
+                    <input ng-model="pw.pw_ok" type="password" class="form-control" placeholder="암호 확인">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-lg btn-block" ng-click="updatePw(pw)">암호 변경</button>
+                </div>
+            </form>
+            <div id="password_update_alert" class="alert hidden" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            </div>
+            <div role="alert"
+                 ng-class="(alertProfile.flag==='success') ? 'alert alert-success' :
+                            (alertProfile.flag==='danger') ? 'alert alert-danger' : 'hidden'">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{alertProfile.text}}
+            </div>
+            <div style="margin-bottom: 120px;"></div>
+        </div>
+    </div>
+</div>

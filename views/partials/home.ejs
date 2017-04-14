@@ -1,0 +1,123 @@
+<style>
+    .breadcrumb {background: rgba(245, 245, 245, 1); border: 2px solid rgba(191, 191, 191, 1); border-radius: 3px; display: block; min-height: 50px;}
+    .breadcrumb li {font-size: 17px;}
+    .breadcrumb a {color: rgba(84, 84, 84, 0.91);}
+    .breadcrumb a:hover {color: rgba(23, 23, 23, 1);}
+    .breadcrumb a.active {
+        color: rgba(50, 155, 155, 1);
+        font-weight: bold;
+        font-size: 19px;
+    }
+    .breadcrumb>li+li:before {color: rgba(204, 204, 204, 1); content: "\007C\00a0";}
+    .modal-dialog {
+        width: 80%;
+    }
+</style>
+<div class="row">
+    <!-- header -->
+    <div uib-carousel active="active" style="margin-bottom:50px;" interval="myInterval" no-wrap="noWrapSlides">
+        <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+            <img ng-src="{{slide.image}}" style="margin:auto;">
+            <div class="carousel-caption" style="background-color: rgba(255, 255, 255, 0.7);">
+                <h3 style="color: #333; font-size: 32px;">{{slide.text}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!-- menu section -->
+    <div class="row" affixer style="z-index: 9999;">
+        <ol class="breadcrumb" >
+            <li><a href="#section-1" du-smooth-scroll du-scrollspy>포토리스트</a></li>
+            <li><a href="#section-2" du-smooth-scroll du-scrollspy>가계부 투게더</a></li>
+            <li><a href="#section-3" du-smooth-scroll du-scrollspy>가계톡</a></li>
+        </ol>
+    </div>
+</div>
+
+<div class="container">
+    <h1>서비스 개발 목록</h1>
+    <section id="section-1">
+        <h2>포토리스트</h2>
+        <p>사진 및 위치를 저장하여 리스트를 보관하는 어플리케이션.</p>
+        <p>개발 내용</p>
+        <ul>
+            <li>안드로이드 가계부 어플리케이션 플레이스토어 출시.</li>
+        </ul>
+    </section>
+    <br><br><br>
+</div>
+<div class="container">
+    <section name="section-2">
+        <h2>가계부 투게더</h2>
+        <p>안드로이드 어플리케이션 개발</p>
+        <p>개발 내용</p>
+        <ul>
+            <li>안드로이드 가계부 어플리케이션 플레이스토어 출시.</li>
+        </ul>
+        <div class = "row" style="margin-bottom:50px;">
+            <!-- gagebutogether -->
+            <div class="col-sm-6 col-md-4" ng-repeat="gagebutogether in gagebutogethers">
+                <div class="thumbnail">
+                    <a  href="" ng-click="$event.preventDefault(); showModalOn(gagebutogether.image)"><img ng-src={{gagebutogether.image}} alt="..."></a>
+                    <div class="caption">
+                        <h4>{{gagebutogether.title}}</h4>
+                        <p>{{gagebutogether.content}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br><br><br>
+</div>
+<div class="container">
+    <section id="section-3">
+        <h2>가계톡</h2>
+        <p>자료 링크 : <a href="upload/gagetalk.pdf">다운로드</a> </p>
+        <p>가게 톡은 소호상인과 개인 고객들을 연결시켜주는 메시지 앱입니다. 현재 노드 서버와 mysql 데이터베이스 android 앱 두벌이 구현 되고 있습니다.</p>
+        <p>개발 내용</p>
+        <ul>
+            <li>소호상인용 웹페이지와 안드로이드 어플리케이션을 개발</li>
+            <li>고객 용 웹페이지와 안드로이드 어플리케이션을 개발</li>
+        </ul>
+        <div class = "row" style="margin-bottom:50px;">
+            <!-- gagetalk -->
+            <div class="col-sm-6 col-md-4" ng-repeat="gagetalk in gagetalks">
+                <div class="thumbnail">
+                    <a  href="" ng-click="$event.preventDefault(); showModalOn(gagetalk.image)"><img ng-src={{gagetalk.image}} alt="..."></a>
+                    <div class="caption">
+                        <h4>{{gagetalk.title}}</h4>
+                        <p>{{gagetalk.content}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </section>
+</div>
+
+<!-- SHOW MODAL -->
+<script type="text/ng-template" id="showModal.html">
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">이미지 크게 보기</h4>
+                </div>
+                <form class="form-horizontal" role="form">
+                    <div class="modal-body">
+                        <div class="row" style="text-align: center;">
+                            <img class="img-responsive" ng-src="{{selected.photo}}"
+                                 class="center-block "
+                                 style="padding: 15px; margin: auto"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-dismiss="modal">닫기</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>

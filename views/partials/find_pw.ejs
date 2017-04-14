@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="./css/login.css" />
+
+<div class="container">
+    <div tabindex="-1" aria-hidden="true">
+        <h1 class="text-center" style="color: #a7dbd8">hyochan.org</h1>
+    </div>
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="./upload/profile/user_empty.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form id="findPwForm" class="form-signin" method="post">
+            <input name="inputEmail" type="email" class="form-control" placeholder="이메일 주소" ng-model="user.email" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block btn-login" ng-disabled="!user.email" ng-click="find_pw(user)">암호 전송</button>
+        </form>
+        <span>
+            <a href="/#login" title="로그인 해주세요." class="register" data-animation="am-fade-and-scale">◀︎ 로그인으로 돌아가기</a>
+        </span>
+        <br><br>
+        <!-- form validation && server response alert -->
+        <div id="field_alert" ng-class="[(isSuccess) ? 'alert alert-success' : 'alert alert-danger', (isAlert) ? '' : 'hidden']" ng-bind-html="fieldAlertHTML" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        </div>
+    </div><!-- /card-container -->
+</div><!-- /container -->"
